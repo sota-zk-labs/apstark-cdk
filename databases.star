@@ -40,6 +40,7 @@ def run(plan, suffix):
     db_configs = get_db_configs(suffix)
     create_postgres_service(plan, db_configs, suffix)
 
+
 def get_db_configs(suffix):
     dbs = DATABASES
 
@@ -58,6 +59,7 @@ def get_db_configs(suffix):
 
 def _service_name(suffix):
     return POSTGRES_SERVICE_NAME + suffix
+
 
 def create_postgres_service(plan, db_configs, suffix):
     init_script_tpl = read_file(src="./templates/databases/init.sql")

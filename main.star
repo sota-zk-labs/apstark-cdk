@@ -6,6 +6,7 @@ input_parser = "./input_parser.star"
 grafana_package = "./src/additional_services/grafana.star"
 prometheus_package = "./src/additional_services/prometheus.star"
 
+
 def run(
     plan,
     deploy_aptos=True,
@@ -20,7 +21,7 @@ def run(
     if args["deploy_aptos"]:
         plan.print("Deploying a local Aptos")
         import_module(aptos_package).run(
-            plan, 
+            plan,
             args["aptos"],
             suffix=args["deployment_suffix"],
         )
@@ -46,6 +47,7 @@ def run(
             deploy_additional_service(plan, "grafana", grafana_package, args)
         else:
             fail("Invalid additional service: %s" % (additional_service))
+
 
 def deploy_additional_service(plan, name, package, args):
     plan.print("Launching %s" % name)

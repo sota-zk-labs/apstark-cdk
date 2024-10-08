@@ -8,10 +8,12 @@ DEFAULT_ARGS = {
 # A list of fork identifiers currently supported by Kurtosis CDK.
 SUPPORTED_FORK_IDS = [9, 11, 12]
 
+
 def parse_args(args):
     args = DEFAULT_ARGS | args
     validate_global_log_level(args["global_log_level"])
     return args
+
 
 def validate_global_log_level(global_log_level):
     if global_log_level not in (

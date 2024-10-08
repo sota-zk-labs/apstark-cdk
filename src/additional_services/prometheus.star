@@ -2,11 +2,13 @@ prometheus_package = import_module(
     "github.com/kurtosis-tech/prometheus-package/main.star"
 )
 
+
 def run(plan, args):
     metrics_jobs = get_metrics_jobs(plan)
     prometheus_package.run(
         plan, metrics_jobs, name="prometheus" + args["deployment_suffix"]
     )
+
 
 def get_metrics_jobs(plan):
     metrics_jobs = []

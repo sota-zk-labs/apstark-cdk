@@ -8,12 +8,9 @@ def apply_default(args):
         "transaction_port": 50051,
     } | args
 
+
 # raw start function with no default values
-def start(
-    plan,
-    args,
-    suffix
-):
+def start(plan, args, suffix):
     args = apply_default(args)
     ports = {}
     ports["rpc"] = PortSpec(
@@ -55,7 +52,7 @@ def start(
             entrypoint=["/usr/local/share/proc-runner/proc-runner.sh"],
             cmd=[
                 command,
-            ], 
+            ],
         ),
     )
     if args["faucet"]:
