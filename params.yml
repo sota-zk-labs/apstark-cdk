@@ -1,0 +1,25 @@
+---
+# Deployment parameters.
+# The deployment process is divided into various stages.
+
+# Deploy local Aptos.
+deploy_aptos: true
+deploy_databases: true
+
+args:
+  # Suffix appended to service names.
+  # Note: It should be a string.
+  deployment_suffix: "-001"
+
+  # The global log level that all components of the stack should log at.
+  # Valid values are "error", "warn", "info", "debug", and "trace".
+  global_log_level: info
+
+  # Additional services to run alongside the network.
+  # Options:
+  # - prometheus_grafana
+  additional_services: ["prometheus_grafana"]
+
+  aptos:
+    image: sotazklabs/aptos-tools:mainnet
+    rpc_port: 8080
