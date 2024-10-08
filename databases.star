@@ -30,7 +30,6 @@ MADARA_ENV_DBS = {
         "name": "madara_explorer_db",
         "user": "madara_explorer_user",
         "password": "redacted",
-        "init": read_file(src="./templates/databases/init.sql"),
     },
 }
 

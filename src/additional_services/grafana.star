@@ -5,8 +5,8 @@ grafana_package = import_module(
 
 GRAFANA_VERSION = "11.1.4"
 # TODO: Fix these
-GRAFANA_DASHBOARDS = "github.com/sotazklabs/apstark-kurtosis/static_files/additional_services/grafana-config/dashboards"
-GRAFANA_ALERTING_TEMPLATE = "github.com/sotazklabs/kurtosis/static_files/additional_services/grafana-config/alerting.yml.tmpl"
+GRAFANA_DASHBOARDS = "github.com/sota-zk-labs/apstark-kurtosis/static_files/additional_services/grafana-config/dashboards"
+GRAFANA_ALERTING_TEMPLATE = "github.com/sota-zk-labs/apstark-kurtosis/static_files/additional_services/grafana-config/alerting.yml.tmpl"
 
 SLACK_CHANNEL = ""
 SLACK_TOKEN = ""
