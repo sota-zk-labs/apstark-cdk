@@ -1,6 +1,8 @@
-databases_package = "./databases.star"
 aptos_package = "./aptos.star"
+databases_package = "./databases.star"
+madara_explorer_package = "./madara_explorer.star"
 input_parser = "./input_parser.star"
+madara_package = "./madara.star"
 
 # Additional services packages.
 grafana_package = "./src/additional_services/grafana.star"
@@ -11,6 +13,8 @@ def run(
     plan,
     deploy_aptos=True,
     deploy_databases=True,
+    deploy_madara=True,
+    deploy_madara_explorer=True,
     args={},
 ):
     args = import_module(input_parser).parse_args(args)
@@ -37,6 +41,24 @@ def run(
         )
     else:
         plan.print("Skipping the deployment of databases")
+
+    # Deploy Madara
+    if deploy_madara:
+        plan.print("Deploying Madara")
+        import_module(madara_package).run(
+            plan, args["madara"], suffix=args["deployment_suffix"]
+        )
+    else:
+        plan.print("Skipping the deployment of Madara")
+
+    # Deploy Madara Explorer
+    if deploy_madara_explorer:
+        plan.print("Deploying Madara Explorer")
+        import_module(madara_explorer_package).run(
+            plan, args["madara_explorer"], suffix=args["deployment_suffix"]
+        )
+    else:
+        plan.print("Skipping the deployment of madara_explorer")
 
     # Launching additional services.
     additional_services = args["additional_services"]

@@ -5,6 +5,8 @@
 # Deploy local Aptos.
 deploy_aptos: true
 deploy_databases: true
+deploy_madara: True
+deploy_madara_explorer: True
 
 args:
   # Suffix appended to service names.
@@ -23,3 +25,11 @@ args:
   aptos:
     image: sotazklabs/aptos-tools:mainnet
     rpc_port: 8080
+
+  madara:
+    image: sotazklabs/madara:latest
+    rpc_port: 9944
+
+  madara_explorer:
+    image: sotazklabs/stark_compass_explorer:v0.2.38
+    rpc_port: 4000
