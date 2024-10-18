@@ -32,4 +32,19 @@ args:
 
   madara_explorer:
     image: sotazklabs/stark_compass_explorer:v0.2.38
-    rpc_port: 4000
+    port: 4000
+
+  madara_orchestrator:
+    image: sotazklabs/madara-orchestrator:latest
+    port: 3000
+
+  localstack:
+    image: localstack/localstack:latest
+    port: 4566
+    default_region: us-east-1
+    aws_access_key_id: test
+    aws_secret_access_key: test
+
+  sqs-admin-ui:
+    image: akilamaxi/sqs-admin-ui:v1
+    port: 8081
