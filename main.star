@@ -1,6 +1,7 @@
 aptos_package = "./aptos.star"
 databases_package = "./databases.star"
 madara_explorer_package = "./madara_explorer.star"
+madara_orchestrator_package = "./madara_orchestrator.star"
 input_parser = "./input_parser.star"
 madara_package = "./madara.star"
 
@@ -15,10 +16,15 @@ def run(
     deploy_databases=True,
     deploy_madara=True,
     deploy_madara_explorer=True,
+    deploy_madara_orchestrator=True,
     args={},
 ):
     args = import_module(input_parser).parse_args(args)
     args = args | {"deploy_aptos": deploy_aptos}  # hacky but works fine for now.
+    args = args | {"deploy_databases": deploy_databases}
+    args = args | {"deploy_madara": deploy_madara}
+    args = args | {"deploy_madara_explorer": deploy_madara_explorer}
+    args = args | {"deploy_madara_orchestrator": deploy_madara_orchestrator}
     plan.print("Deploying with parameters: " + str(args))
 
     # Deploy a local Aptos.
@@ -59,6 +65,15 @@ def run(
         )
     else:
         plan.print("Skipping the deployment of madara_explorer")
+
+    # Deploy Madara Orchestrator
+    if deploy_madara_orchestrator:
+        plan.print("Deploying Madara Orchestrator")
+        import_module(madara_orchestrator_package).run(
+            plan, args["madara_orchestrator"], suffix=args["deployment_suffix"]
+        )
+    else:
+        plan.print("Skipping the deployment of Madara Orchestrator")
 
     # Launching additional services.
     additional_services = args["additional_services"]
