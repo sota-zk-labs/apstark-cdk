@@ -29,6 +29,7 @@ args:
   madara:
     image: sotazklabs/madara:latest
     rpc_port: 9944
+    gateway_port: 8080
 
   madara_explorer:
     image: sotazklabs/stark_compass_explorer:v0.2.38
@@ -48,3 +49,7 @@ args:
   sqs-admin-ui:
     image: akilamaxi/sqs-admin-ui:v1
     port: 8081
+
+  pathfinder:
+    image: sotazklabs/pathfinder:latest
+    port: 9545
