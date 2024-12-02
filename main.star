@@ -27,7 +27,9 @@ def run(
     if deploy_contracts:
         plan.print("Deploying contracts")
         import_module(jayce_package).run(
-            plan, args["jayce"], suffix=args["deployment_suffix"],
+            plan,
+            args["jayce"],
+            suffix=args["deployment_suffix"],
         )
     else:
         plan.print("Skipping the deployment of contracts")
