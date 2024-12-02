@@ -3,6 +3,7 @@ databases_package = "./databases.star"
 madara_explorer_package = "./madara_explorer.star"
 input_parser = "./input_parser.star"
 madara_package = "./madara.star"
+jayce_package = "./jayce.star"
 
 # Additional services packages.
 grafana_package = "./src/additional_services/grafana.star"
@@ -15,11 +16,21 @@ def run(
     deploy_databases=True,
     deploy_madara=True,
     deploy_madara_explorer=True,
+    deploy_contracts=True,
     args={},
 ):
     args = import_module(input_parser).parse_args(args)
     args = args | {"deploy_aptos": deploy_aptos}  # hacky but works fine for now.
     plan.print("Deploying with parameters: " + str(args))
+
+    # Deploy contracts
+    if deploy_contracts:
+        plan.print("Deploying contracts")
+        import_module(jayce_package).run(
+            plan, args["jayce"], suffix=args["deployment_suffix"],
+        )
+    else:
+        plan.print("Skipping the deployment of contracts")
 
     # Deploy a local Aptos.
     if args["deploy_aptos"]:
