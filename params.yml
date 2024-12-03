@@ -44,3 +44,4 @@ args:
       - ../contracts/navori/cpu-2
       - ../contracts/navori/cpu
       - ../contracts/navori/verifier
+      - ../contracts/ionia

@@ -1,5 +1,5 @@
 module_type = "object"
 private_key = "0x"
 network = "devnet"
-addresses_name = ["lib_addr", "cpu_2_addr", "cpu_addr", "verifier_addr"]
+addresses_name = ["lib_addr", "cpu_2_addr", "cpu_addr", "verifier_addr", "starknet_addr"]
 yes = true
