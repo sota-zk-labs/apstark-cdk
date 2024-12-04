@@ -38,7 +38,6 @@ args:
   jayce:
     image: sotazklabs/jayce:latest
     config_file: ../static_files/jayce/deploy-contracts.toml
-    output_file_name: deploy-output.json
     contracts:
       - ../contracts/navori/libs
       - ../contracts/navori/cpu-2

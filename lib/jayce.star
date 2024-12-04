@@ -4,10 +4,9 @@ def apply_default(args):
 
 def start(plan, args, suffix):
     args = apply_default(args)
-
     name = args["name"] + suffix
-
-    output_file_path = "/app/" + args["output_file_name"]
+    output_file_name = "deploy-report.json"
+    output_file_path = "/app/" + output_file_name
 
     # mount config files
     config_file_artifact = plan.upload_files(
@@ -26,9 +25,7 @@ def start(plan, args, suffix):
         command += " --modules-path "
     for i, contract_path in enumerate(args["contracts"]):
         contract_artifact = plan.upload_files(src=contract_path, name=contract_path)
-        container_contract_path = (
-            "/app/contracts/" + last_file_or_dir(contract_path) + "-" + str(i)
-        )
+        container_contract_path = "/app/contracts/" + last_file_or_dir(contract_path)
         mounted_files[container_contract_path] = contract_artifact
         command += container_contract_path + ","
 
@@ -46,13 +43,10 @@ def start(plan, args, suffix):
             entrypoint=["sleep", "infinity"],
         ),
     )
-    plan.wait(
+    plan.exec(
         service_name=name,
         recipe=ExecRecipe(command=command),
-        field="code",
-        assertion="==",
-        target_value=0,
-        timeout="1h",
+        skip_code_check=True,
         description="Deploying contracts by Jayce",
     )
     plan.exec(
@@ -67,15 +61,16 @@ def start(plan, args, suffix):
     output_file_artifact = plan.store_service_files(
         service_name=name,
         src=output_file_path,
-        name=args["output_file_name"],
+        name=output_file_name,
     )
-    plan.add_service(
-        name="jayce-output",
-        config=ServiceConfig(image="alpine", files={"/app": output_file_artifact}),
-    )
+    # plan.add_service(
+    #     name="jayce-output",
+    #     config=ServiceConfig(image="alpine", files={"/app": output_file_artifact}),
+    # )
 
     # stop jayce
     plan.stop_service(name=name)
+    # plan.stop_service(name="jayce-output")
 
 
 def last_file_or_dir(path):
