@@ -18,9 +18,14 @@ def run(plan, args, suffix):
 
     name = args["name"] + suffix
 
+    reset_sqs_file_artifact = plan.upload_file(
+        src="../scripts/reset_sqs.sh",
+    )
+
     config = ServiceConfig(
         image=args["image"],
         ports=ports,
+        files={"/localstack-setup.sh": reset_sqs_file_artifact},
         env_vars={
             "DEFAULT_REGION": args["default_region"],
             "AWS_ACCESS_KEY_ID": args["aws_access_key_id"],
