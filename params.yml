@@ -3,10 +3,11 @@
 # The deployment process is divided into various stages.
 
 # Deploy local Aptos.
-deploy_aptos: true
-deploy_databases: true
+deploy_aptos: True
+deploy_databases: True
 deploy_madara: True
 deploy_madara_explorer: True
+deploy_contracts: True
 
 args:
   # Suffix appended to service names.
@@ -33,3 +34,13 @@ args:
   madara_explorer:
     image: sotazklabs/stark_compass_explorer:v0.2.38
     rpc_port: 4000
+
+  jayce:
+    image: sotazklabs/jayce:latest
+    config_file: ../static_files/jayce/deploy-contracts.toml
+    contracts:
+      - ../contracts/navori/libs
+      - ../contracts/navori/cpu-2
+      - ../contracts/navori/cpu
+      - ../contracts/navori/verifier
+      - ../contracts/ionia

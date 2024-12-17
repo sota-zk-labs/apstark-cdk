@@ -1,0 +1,6 @@
+[submodule "contracts/navori"]
+	path = contracts/navori
+	url = git@github.com:sota-zk-labs/navori.git
+[submodule "contracts/ionia"]
+	path = contracts/ionia
+	url = git@github.com:sota-zk-labs/ionia.git
